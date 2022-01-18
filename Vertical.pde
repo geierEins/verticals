@@ -2,10 +2,15 @@ class Vertical {
 
   PVector [] coos;
 
-  Vertical(int x, int numOfPoints) {
-    coos = buildPVectorFromArray(x, sortYCoordinatesArray(
-      //buildRandomYcoordinatesArray(numOfPoints, (int)(height*0.1), (int)(height*0.9))));
-      buildDescYcoordinatesArray(numOfPoints, 0.3333, (int)(height*0.1), (int)(height*1))));
+  Vertical(int x, int numOfPoints, int strategy) {
+    if (strategy == -1) {
+      coos = buildPVectorFromArray(x, sortYCoordinatesArray(
+        buildRandomYcoordinatesArray(numOfPoints, (int)(height*0.1), (int)(height*0.9))));
+    }
+    if (strategy == 1) {
+      coos = buildPVectorFromArray(x, sortYCoordinatesArray(
+      buildDescYcoordinatesArray(numOfPoints, 0.08)));
+    }
   }
 
   int[] buildRandomYcoordinatesArray(int numOfPoints, int from, int to) {
@@ -23,8 +28,10 @@ class Vertical {
     for (int i = 0; i < numOfPoints; i++) {
       yCoordinates[i] = (int)(remainingHeight * shrinkBy) + takenHeight;
       println("i: " + i + ", y: " + yCoordinates[i]);
-      takenHeight *= shrinkBy;
-      takenHeight = height-remainingHeight;
+      takenHeight = yCoordinates[i];
+      println("i: " + i + ", takenHeight: " + takenHeight);
+      remainingHeight = (int)(remainingHeight - (remainingHeight * shrinkBy));
+      println("i: " + i + ", remainingHeight: " + remainingHeight);
     }
     return yCoordinates;
   }

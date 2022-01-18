@@ -14,9 +14,11 @@ class VerticalController {
 
   void createVerticalsAndPutThemInArray() {
     int nextX;
+    int alternate = 1;
     for (int i = 0; i < verticals.length; i++) {
       nextX = (int)(i*(width/verticals.length)+(width/verticals.length*0.5));
-      verticals[i] = new Vertical(nextX, pointsPerVertical);
+      verticals[i] = new Vertical(nextX, pointsPerVertical, -1);
+      alternate*=-1;
     }
   }
 
